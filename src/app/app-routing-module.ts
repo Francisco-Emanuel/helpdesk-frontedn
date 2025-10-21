@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { Login } from './auth/login/login'; 
+import { Register } from './auth/register/register';
+import { DepList } from './departamentos/dep-list/dep-list';
+import { ChaList } from './chamados/cha-list/cha-list';
+import { DepForm } from './departamentos/dep-form/dep-form';
+import { ChaForm } from './chamados/cha-form/cha-form';
+
+const routes: Routes = [
+  {path: 'login', component: Login},
+  {path: 'register', component: Register},
+
+  {path: 'departamentos', component: DepList},
+  {path: 'departamentos/criar', component: DepForm},
+
+  {path: 'chamados', component: ChaList},
+  {path: 'chamados/criar', component: ChaForm},
+
+  {path: '', redirectTo: '/login', pathMatch:'full'},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
