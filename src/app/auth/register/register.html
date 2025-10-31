@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div class="min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+  <div class="mb-4">
+    <a routerLink="/">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 fill-current text-gray-500" viewBox="0 0 16 16">
+        <path d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916zM12.375 6v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2M.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1z"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <h2 class="text-center text-2xl font-bold text-gray-700 mb-6">Criar Conta</h2>
+
+    <div *ngIf="errorMessage" class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onRegister()">
+      <div>
+        <label for="name" class="block font-medium text-sm text-gray-700">Nome</label>
+        <input id="name" type="text" name="name" [(ngModel)]="userData.name" required autofocus autocomplete="name"
+               class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        </div>
+
+      <div class="mt-4">
+        <label for="password" class="block font-medium text-sm text-gray-700">Senha</label>
+        <input id="password" type="password" name="password" [(ngModel)]="userData.password" required autocomplete="new-password"
+               class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        </div>
+
+      <div class="mt-4">
+        <label for="password_confirmation" class="block font-medium text-sm text-gray-700">Confirmar Senha</label>
+        <input id="password_confirmation" type="password" name="password_confirmation" [(ngModel)]="userData.password_confirmation" required autocomplete="new-password"
+               class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+      </div>
+
+      <div class="flex items-center justify-end mt-4">
+        <a routerLink="/login" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Já tem uma conta?
+        </a>
+
+        <button type="submit" class="ms-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+          Registrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
