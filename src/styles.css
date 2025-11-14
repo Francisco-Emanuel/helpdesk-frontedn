@@ -1,3 +1,227 @@
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+}
+
+.guest-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 'sm:justify-center' */
+  align-items: center;
+  padding-top: 1.5rem; /* 'pt-6' */
+  background-color: #f3f4f6; /* 'bg-gray-100' do Laravel */
+}
+
+.guest-logo {
+  margin-bottom: 1rem;
+}
+.guest-logo svg {
+  width: 5rem; /* 'w-20' */
+  height: 5rem; /* 'h-20' */
+  fill: #6b7280; /* 'text-gray-500' */
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 28rem; /* 'sm:max-w-md' */
+  margin-top: 1.5rem; /* 'mt-6' */
+  /* Ajustei o padding para ficar melhor com os campos do Material */
+  padding: 2rem 1.5rem;
+  background-color: #ffffff; /* 'bg-white' */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 'shadow-md' */
+  overflow: hidden;
+  border-radius: 0.5rem; /* 'sm:rounded-lg' */
+  box-sizing: border-box; /* Garante que o padding não estoure o max-width */
+}
+
+.auth-card h2 {
+  text-align: center;
+  font-size: 1.5rem; /* 'text-2xl' */
+  font-weight: bold;
+  color: #374151; /* 'text-gray-700' */
+  margin-top: 0;
+  margin-bottom: 1.5rem; /* 'mb-6' */
+}
+
+.full-width {
+  width: 100%;
+}
+
+.auth-actions {
+  display: flex;
+  justify-content: flex-end; /* 'justify-end' */
+  align-items: center;
+  margin-top: 1.5rem; /* 'mt-4' */
+}
+
+.auth-actions a {
+  font-size: 0.875rem; /* 'text-sm' */
+  color: #4b5563; /* 'text-gray-600' */
+  text-decoration: underline;
+  margin-right: auto; /* Joga o link para a esquerda, e o botão para a direita */
+}
+
+.error-message {
+  color: #dc2626; /* 'text-red-700' */
+  background-color: #fee2e2; /* 'bg-red-100' */
+  border: 1px solid #fca5a5; /* 'border-red-400' */
+  padding: 1rem;
+  border-radius: 0.375rem; /* 'rounded' */
+  margin-bottom: 1rem; /* 'mb-4' */
+}
+/* Layout Principal */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar (baseado no navigation.blade.php) */
+.app-navbar {
+  background-color: #ffffff !important; /* 'bg-white' */
+  border-bottom: 1px solid #e5e7eb; /* 'border-b border-gray-100' */
+  color: #374151 !important;
+}
+
+/* Container (baseado no max-w-7xl mx-auto px-4 sm:px-6 lg:px-8) */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px; /* 'max-w-7xl' */
+  margin: 0 auto;
+  padding: 0 1.5rem; /* 'px-4 sm:px-6 lg:px-8' */
+  box-sizing: border-box;
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 2.5rem; /* 'sm:ml-10' (na verdade é 'ml-10' nos links) */
+}
+.navbar-logo svg {
+  height: 2.5rem;
+  width: 2.5rem;
+  fill: #4b5563;
+}
+
+/* Links (baseado no nav-link) */
+.nav-links a {
+  padding: 0 0.5rem !important;
+  margin: 0 1rem !important; /* 'space-x-8' */
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  height: 4rem; /* 'h-16' */
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Link Ativo (baseado no :active do nav-link) */
+.nav-links a.active-link {
+  /* Use sua 'primary' color. O $azure-palette do seu tema */
+  border-bottom-color: #3b82f6; /* Ajuste se for outra cor */
+  color: #1f2937;
+}
+
+/* Botão do menu de usuário */
+.user-menu-button span {
+  margin-right: -4px; /* Ajuste para ícone */
+}
+
+/* Layout do Conteúdo Principal */
+.main-content {
+  flex-grow: 1;
+  background-color: #f3f4f6; /* 'bg-gray-100' */
+  padding: 2rem 0; /* Espaçamento */
+  overflow-y: auto;
+}
+
+/* Container do conteúdo (para centralizar) */
+.content-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho da Página (Título e Botão de Ação) */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.page-header h2 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 600;
+  color: #1f2937; /* text-gray-800 */
+  margin: 0;
+}
+
+/* Card principal da página (para tabelas ou conteúdo) */
+.page-card {
+  width: 100%;
+  background-color: #ffffff !important;
+  border-radius: 0.5rem !important; /* sm:rounded-lg */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important; /* shadow-sm */
+  padding: 1.5rem !important; /* py-8 px-4 sm:px-10 */
+  box-sizing: border-box;
+}
+
+/* Card de Formulário (um pouco menor) */
+.form-card {
+  max-width: 768px; /* md:max-w-3xl */
+  margin: 0 auto; /* Centraliza */
+}
+.form-card mat-card-title {
+  margin-bottom: 1.5rem;
+}
+
+/* Ações do Formulário (Salvar, Cancelar) */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Botão de "Voltar" (para formulários) */
+.back-button {
+  margin-bottom: 1rem;
+}

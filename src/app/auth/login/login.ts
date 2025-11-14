@@ -19,7 +19,7 @@ export class Login {
   onLogin(): void {
     this.auth.login(this.credentials).subscribe(
       () => {
-        this.router.navigate(['/chamados']);
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error('Erro no login:', error);

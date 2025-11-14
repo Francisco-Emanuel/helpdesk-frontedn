@@ -1,1 +1,28 @@
-<p>dep-form works!</p>
+<a mat-stroked-button routerLink="/departamentos" class="back-button">
+  <mat-icon>arrow_back</mat-icon>
+  Voltar para a Lista
+</a>
+
+<mat-card class="form-card">
+  <mat-card-title>Novo Departamento</mat-card-title>
+  
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()">
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput 
+               name="nome" 
+               [(ngModel)]="departamento.name" 
+               required>
+      </mat-form-field>
+
+
+      <div class="form-actions">
+        <a mat-button routerLink="/departamentos">Cancelar</a>
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

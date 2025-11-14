@@ -8,17 +8,26 @@ import { ChaList } from './chamados/cha-list/cha-list';
 import { DepForm } from './departamentos/dep-form/dep-form';
 import { ChaForm } from './chamados/cha-form/cha-form';
 
+import { AppLayoutComponent } from './layouts/app-layout/app-layout';
+
 const routes: Routes = [
   {path: 'login', component: Login},
   {path: 'register', component: Register},
 
-  {path: 'departamentos', component: DepList},
-  {path: 'departamentos/criar', component: DepForm},
+  {
+    path: '', // O "pai" agora é o caminho raiz
+    component: AppLayoutComponent,
+    children: [
+      { path: 'departamentos', component: DepList },
+      { path: 'departamentos/criar', component: DepForm },
 
-  {path: 'chamados', component: ChaList},
-  {path: 'chamados/criar', component: ChaForm},
+      { path: 'chamados', component: ChaList },
+      { path: 'chamados/criar', component: ChaForm },
 
-  {path: '', redirectTo: '/login', pathMatch:'full'},
+      // Redireciona a raiz (ex: localhost:4200) para /chamados
+      { path: '', redirectTo: '/chamados', pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({
