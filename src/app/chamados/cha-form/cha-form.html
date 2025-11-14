@@ -1,1 +1,50 @@
-<p>cha-form works!</p>
+<a mat-stroked-button routerLink="/chamados" class="back-button">
+  <mat-icon>arrow_back</mat-icon>
+  Voltar para a Lista
+</a>
+
+<mat-card class="form-card">
+  <mat-card-title>Abrir Novo Chamado</mat-card-title>
+  
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()">
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Título</mat-label>
+        <input matInput name="title" [(ngModel)]="chamado.title" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descrição do Problema</mat-label>
+        <textarea matInput name="descr" [(ngModel)]="chamado.descr" rows="4" required></textarea>
+      </mat-form-field>
+
+      <div class="form-row" style="display: flex; gap: 1rem;">
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Local</mat-label>
+          <input matInput name="local" [(ngModel)]="chamado.local" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Departamento</mat-label>
+          <mat-select name="departamentoId" [(ngModel)]="chamado.departamentoId" required>
+            <mat-option *ngFor="let dep of departamentos" [value]="dep.id">
+              {{ dep.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Status</mat-label>
+        <input matInput name="status" [(ngModel)]="chamado.status" readonly>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <a mat-button routerLink="/chamados">Cancelar</a>
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
