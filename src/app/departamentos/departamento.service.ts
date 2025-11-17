@@ -23,8 +23,12 @@ export class DepartamentoService {
     return this.http.post<Departamento>(`${this.apiUrl}`, departamento);
   }
 
-  atualizarDepartamento(id: number, departamento: Departamento): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, departamento);
+  findById(id: number): Observable<Departamento> {
+    return this.http.get<Departamento>(`${this.apiUrl}/${id}`);
+  }
+
+  update(departamento: Departamento): Observable<Departamento> {
+    return this.http.put<Departamento>(`${this.apiUrl}/${departamento.id}`, departamento);
   }
 
   deleteDepartamento(id: number): Observable<any> {

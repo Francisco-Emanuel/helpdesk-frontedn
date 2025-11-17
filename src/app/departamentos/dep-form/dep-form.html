@@ -1,26 +1,29 @@
 <a mat-stroked-button routerLink="/departamentos" class="back-button">
   <mat-icon>arrow_back</mat-icon>
-  Voltar para a Lista
+  Voltar
 </a>
 
 <mat-card class="form-card">
-  <mat-card-title>Novo Departamento</mat-card-title>
-  
+  <mat-card-title>
+    {{ departamento.id ? 'Editar Departamento' : 'Novo Departamento' }}
+  </mat-card-title>
+
   <mat-card-content>
     <form (ngSubmit)="onSubmit()">
-      
+
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nome</mat-label>
-        <input matInput 
-               name="nome" 
-               [(ngModel)]="departamento.name" 
+        <input matInput
+               name="name"
+               [(ngModel)]="departamento.name"
                required>
       </mat-form-field>
 
-
       <div class="form-actions">
         <a mat-button routerLink="/departamentos">Cancelar</a>
-        <button mat-raised-button color="primary" type="submit">Salvar</button>
+        <button mat-raised-button color="primary" type="submit">
+          {{ departamento.id ? 'Atualizar' : 'Salvar' }}
+        </button>
       </div>
 
     </form>
