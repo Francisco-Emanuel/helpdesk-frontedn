@@ -15,45 +15,60 @@
       {{ errorMessage }}
     </div>
 
-    <form (ngSubmit)="onRegister()">
-      
+    <form (ngSubmit)="onRegister()" #regForm="ngForm">
+
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nome</mat-label>
-        <input matInput 
-               id="name" 
-               type="text" 
-               name="name" 
-               [(ngModel)]="userData.name" 
-               required 
+        <input matInput
+               id="name"
+               type="text"
+               name="name"
+               [(ngModel)]="userData.name"
+               required
+               minlength="4"
+               #nameRef="ngModel"
                autofocus>
+        <mat-error *ngIf="nameRef.hasError('minlength') && nameRef.touched">
+          O nome deve ter no mínimo 4 caracteres.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Senha</mat-label>
-        <input matInput 
-               id="password" 
-               type="password" 
-               name="password" 
-               [(ngModel)]="userData.password" 
-               required>
+        <input matInput
+               id="password"
+               type="password"
+               name="password"
+               [(ngModel)]="userData.password"
+               required
+               minlength="6"
+               #passwordRef="ngModel">
+        <mat-error *ngIf="passwordRef.hasError('minlength') && passwordRef.touched">
+          A senha deve ter no mínimo 6 caracteres.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Confirmar Senha</mat-label>
-        <input matInput 
-               id="password_confirmation" 
-               type="password" 
-               name="password_confirmation" 
-               [(ngModel)]="userData.password_confirmation" 
+        <input matInput
+               id="password_confirmation"
+               type="password"
+               name="password_confirmation"
+               [(ngModel)]="userData.password_confirmation"
                required>
       </mat-form-field>
 
       <div class="auth-actions">
         <a routerLink="/login">Já tem uma conta?</a>
-        
-        <button mat-raised-button color="primary" type="submit">Registrar</button>
+
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="regForm.invalid">
+          Registrar
+        </button>
       </div>
-      
+
     </form>
   </div>
 </div>
