@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, model, OnInit } from '@angular/core';
 import { DepartamentoService, Departamento } from '../departamento.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router'; // Importar Router
+import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+
+export interface DialogData {
+  name: string;
+}
 
 @Component({
   selector: 'app-dep-list',
@@ -13,6 +22,9 @@ export class DepList implements OnInit {
   displayedColumns: string[] = ['name', 'acoes'];
   dataSource: Departamento[] = [];
 
+  readonly name = model('');
+  readonly dialog = inject(MatDialog);
+
   constructor(
     private departamentoService: DepartamentoService,
     private snackBar: MatSnackBar,
@@ -21,6 +33,19 @@ export class DepList implements OnInit {
 
   ngOnInit(): void {
     this.loadDepartamentos();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: { name: this.name() },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.name.set(result);
+      }
+    });
   }
 
   loadDepartamentos(): void {
@@ -44,5 +69,30 @@ export class DepList implements OnInit {
         () => this.snackBar.open('Erro ao excluir.', 'Fechar', { duration: 3000 })
       );
     }
+  }
+}
+
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: './dialog.html',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+  ],
+})
+export class DialogOverviewExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly name = model(this.data.name);
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

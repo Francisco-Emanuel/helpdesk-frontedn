@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <p>Qual o novo nome do departamento?</p>
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="name" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="onNoClick()">cancelar</button>
+  <button matButton [mat-dialog-close]="name()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

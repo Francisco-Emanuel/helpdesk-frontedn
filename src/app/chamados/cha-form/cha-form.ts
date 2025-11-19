@@ -11,12 +11,12 @@ import { DepartamentoService, Departamento } from '../../departamentos/departame
   styleUrl: './cha-form.css'
 })
 export class ChaForm implements OnInit {
-  
+
   chamado: ChamadoRequest = {
     title: '',
     descr: '',
     local: '',
-    status: 'Aberto', // Valor padrão
+    status: 'Aberto',
     departamentoId: null
   };
 
@@ -30,7 +30,6 @@ export class ChaForm implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Carregar departamentos para o <mat-select>
     this.departamentoService.getDepartamentos().subscribe(
       (data) => this.departamentos = data,
       (error) => console.error('Erro ao carregar departamentos', error)

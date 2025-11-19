@@ -9,7 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './cha-list.css'
 })
 export class ChaList implements OnInit {
-  // Colunas baseadas no seu modelo Chamado.java
   displayedColumns: string[] = ['id', 'title', 'local', 'status', 'departamento', 'dataAbertura'];
   dataSource: Chamado[] = [];
 

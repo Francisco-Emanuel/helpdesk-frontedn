@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Departamento } from '../departamentos/departamento.service';
 
-// Interface para Listagem (o que vem do backend - Chamado.java)
 export interface Chamado {
   id?: number;
   title: string;
@@ -12,17 +11,16 @@ export interface Chamado {
   status: string;
   dataAbertura?: string;
   tecnico?: string;
-  departamento?: Departamento; // O backend retorna o objeto completo aqui
+  departamento?: Departamento;
   usuario?: any;
 }
 
-// Interface para Criação (o que vai para o backend - ChamadoRequestDTO.java)
 export interface ChamadoRequest {
   title: string;
   descr: string;
   local: string;
   status: string;
-  departamentoId: number | null; // O backend espera apenas o ID
+  departamentoId: number | null; 
 }
 
 @Injectable({

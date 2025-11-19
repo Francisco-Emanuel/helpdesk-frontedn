@@ -3,18 +3,15 @@ import { CommonModule } from '@angular/common';
 import { DepList } from './dep-list/dep-list';
 import { DepForm } from './dep-form/dep-form';
 
-// Para o formulário (vamos usar FormsModule por enquanto)
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-// Imports do Angular Material
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-// Adicione o MatSnackBar para feedback
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
@@ -24,17 +21,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   imports: [
     CommonModule,
-    FormsModule, // Mantenha este para [(ngModel)]
+    FormsModule,
     RouterModule,
 
-    // Módulos do Material
     MatTableModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule // Adicionado
+    MatSnackBarModule
   ],
 })
 export class DepartamentosModule { }
