@@ -4,11 +4,13 @@
 </a>
 
 <mat-card class="form-card">
-  <mat-card-title>Abrir Novo Chamado</mat-card-title>
-  
+  <mat-card-title>
+    {{ chamado.id ? 'Editar Chamado #' + chamado.id : 'Abrir Novo Chamado' }}
+  </mat-card-title>
+
   <mat-card-content>
     <form (ngSubmit)="onSubmit()">
-      
+
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Título</mat-label>
         <input matInput name="title" [(ngModel)]="chamado.title" required>
@@ -37,12 +39,14 @@
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Status</mat-label>
-        <input matInput name="status" [(ngModel)]="chamado.status" readonly>
+        <input matInput name="status" [(ngModel)]="chamado.status" [readonly]="!chamado.id">
       </mat-form-field>
 
       <div class="form-actions">
         <a mat-button routerLink="/chamados">Cancelar</a>
-        <button mat-raised-button color="primary" type="submit">Salvar</button>
+        <button mat-raised-button color="primary" type="submit">
+          {{ chamado.id ? 'Atualizar' : 'Salvar' }}
+        </button>
       </div>
 
     </form>

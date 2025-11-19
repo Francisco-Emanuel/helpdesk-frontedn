@@ -20,22 +20,34 @@ export interface ChamadoRequest {
   descr: string;
   local: string;
   status: string;
-  departamentoId: number | null; 
+  departamentoId: number | null;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChamadoService {
   private apiUrl = 'http://localhost:8080/chamados';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getChamados(): Observable<Chamado[]> {
     return this.http.get<Chamado[]>(this.apiUrl);
   }
 
+  findById(id: number): Observable<Chamado> {
+    return this.http.get<Chamado>(`${this.apiUrl}/${id}`);
+  }
+
   addChamado(chamado: ChamadoRequest): Observable<Chamado> {
     return this.http.post<Chamado>(this.apiUrl, chamado);
+  }
+
+  update(chamado: ChamadoRequest & { id: number }): Observable<Chamado> {
+    return this.http.put<Chamado>(`${this.apiUrl}/${chamado.id}`, chamado);
+  }
+
+  deleteChamado(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

@@ -24,6 +24,7 @@ const routes: Routes = [
 
       { path: 'chamados', component: ChaList },
       { path: 'chamados/criar', component: ChaForm },
+      { path: 'chamados/editar/:id', component: ChaForm },
 
       { path: '', redirectTo: '/chamados', pathMatch: 'full' },
     ],

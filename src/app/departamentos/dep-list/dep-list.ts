@@ -99,7 +99,6 @@ export class DepList implements OnInit {
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
