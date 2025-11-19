@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 export interface DialogData {
+  id: number;
   name: string;
 }
 
@@ -35,15 +36,32 @@ export class DepList implements OnInit {
     this.loadDepartamentos();
   }
 
-  openDialog(): void {
+  openDialog(element: Departamento): void {
+    if (!element.id) return;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: { name: this.name() },
+      data: { id: element.id, name: element.name },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.name.set(result);
+    dialogRef.afterClosed().subscribe((new_name: string | undefined) => {
+      console.log('The dialog was closed, result:', new_name);
+
+      if (new_name && new_name.trim().length > 0 && new_name.trim() !== element.name) {
+        const updatedDepartamento: Departamento = {
+          id: element.id,
+          name: new_name.trim(),
+        };
+
+        this.departamentoService.update(updatedDepartamento).subscribe(
+          () => {
+            this.snackBar.open('Atualizado com sucesso!', 'Fechar', { duration: 2000 });
+            this.loadDepartamentos();
+          },
+          () => this.snackBar.open('Erro ao atualizar.', 'Fechar', { duration: 3000 })
+        );
+      } else if (new_name !== undefined) {
+        this.snackBar.open('Nenhuma alteração feita ou nome inválido.', 'Fechar', {
+          duration: 2000,
+        });
       }
     });
   }
